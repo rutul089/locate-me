@@ -1,0 +1,10 @@
+{
+    "env": {
+      "MONGO_ATLAS_PW": "Navkar123",
+      "JWT_KEY": "Locate-Me",
+      "MONGO_USER": "rutul",
+      "MONGO_PWD": "Navkar123",
+      "MONGO_DEFAULT_DB": "locate-me"
+    }
+  }
+  
