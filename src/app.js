@@ -1,4 +1,4 @@
-
+//mongodb+srv://rutul:Navkar123@locateme-2utag.mongodb.net/locate-me?retryWrites=true&w=majority
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -17,7 +17,7 @@ const productRoute = require('./api/routes/products')
 // mongoose.connect('mongodb+srv://rutul:' +  process.env.MONGO_PWD
 //  +'@locateme-2utag.mongodb.net/' + process.env.MONGO_DEFAULT_DB  + '?retryWrites=true&w=majority')
 
-mongoose.connect('mongodb+srv://rutul:Navkar123@locateme-2utag.mongodb.net/locate-me?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://Root:Root@cluster0-b0egl.mongodb.net/AngularAssignment?retryWrites=true&w=majority',
                 (err) => {
           if (err) console.log('Failed to connect to mongodb server', err);
           else console.log('successfully connected to mongodb server!');
