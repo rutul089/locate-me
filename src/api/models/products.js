@@ -10,12 +10,14 @@ const productSchema = mongoose.Schema({
     city: { type: String, require: false },
     state: { type: String, require: false },
     village: { type: String, require: false },
+    country: { type: String, require: false },
     latitude: { type: Number, require: true },
     longitude: { type: Number, require: true },
     installDate: { type: String, default: Date.now },
     serviceDate: { type: String, default: Date.now },
     serviceCount: { type: Number, require: false },
-    isActive: { type: Boolean, require: true, default: false }
+    isActive: { type: Boolean, require: true, default: false },
+    productImage: { type: Number, require: false },
 })
 
 

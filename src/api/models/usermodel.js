@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 let mongooseHidden = require("mongoose-hidden")();
-
+/**
+ * 3 type of user role 
+ * - Admin
+ * - Installer : can add location
+ * - Technician : not able to add location
+ */
 const userSchema = mongoose.Schema(
     {
         
