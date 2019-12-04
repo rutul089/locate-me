@@ -10,8 +10,10 @@ const productController = require("../controller/product.controller");
 productRoute.get('/', checkAuth, productController.get_all_products)
 
 //-- Add new product
-productRoute.post('/', checkAuth, productController.add_product)
+productRoute.post('/', checkAuth,productController.add_product)
 
 //-- fetching sigle product , dlete product , edit product pending 
 
+//-- update product from product id 
+productRoute.post('/updateproduct/:productID',checkAuth,productController.update_product)
 module.exports = productRoute;

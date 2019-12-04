@@ -58,7 +58,11 @@ exports.add_product = (req, res, next) => {
                     installDate: req.body.installDate,
                     serviceDate: req.body.serviceDate,
                     serviceCount: req.body.serviceCount,
-                    isActive: req.body.isActive
+                    isActive: req.body.isActive,
+                    notes:[{
+                        empName:req.body.empName,
+                        remark:req.body.notedata
+                    }]
                 });
 
                 product.save()
@@ -82,7 +86,7 @@ exports.add_product = (req, res, next) => {
             } else {
                 const product = new Products({
                     _id: new mongoose.Types.ObjectId(),
-                    productID: 1,
+                    productID: id,
                     name: req.body.name,
                     category: req.body.category,
                     city: req.body.city,
@@ -93,7 +97,11 @@ exports.add_product = (req, res, next) => {
                     installDate: req.body.installDate,
                     serviceDate: req.body.serviceDate,
                     serviceCount: req.body.serviceCount,
-                    isActive: req.body.isActive
+                    isActive: req.body.isActive,
+                    notes:[{
+                        empName:req.body.empName,
+                        remark:req.body.notedata
+                    }]
                 });
 
                 product.save()
@@ -111,7 +119,7 @@ exports.add_product = (req, res, next) => {
                         res.status(500).json({
                             isSuccess: false,
                             message: err,
-                            error_code: CATEGORY_NOT_FOUND
+                            error_code: 101
                         });
                     });
             }
@@ -122,7 +130,7 @@ exports.add_product = (req, res, next) => {
 
             const product = new Products({
                 _id: new mongoose.Types.ObjectId(),
-                productID: 1,
+                productID: 455545454545,
                 name: req.body.name,
                 category: req.body.category,
                 city: req.body.city,
@@ -133,7 +141,11 @@ exports.add_product = (req, res, next) => {
                 installDate: req.body.installDate,
                 serviceDate: req.body.serviceDate,
                 serviceCount: req.body.serviceCount,
-                isActive: req.body.isActive
+                isActive: req.body.isActive,
+                notes:[{
+                    empName:req.body.empName,
+                    remark:req.body.notedata
+                }]
             });
 
             product.save()
@@ -151,12 +163,64 @@ exports.add_product = (req, res, next) => {
                     res.status(500).json({
                         isSuccess: false,
                         message: err,
-                        error_code: CATEGORY_NOT_FOUND
+                        error_code: 101
                     });
                 });
         });
 
+}
 
+//-- To update product
+exports.update_product = (req,res, next) => {
+    const pID = req.params.productID;
 
+    const userviceCount = req.body.serviceCount;
+    const uisActive = req.body.isActive;
+    const userviceDate = req.body.serviceDate;
+    const uempName = req.body.empName;
+    const uremark = req.body.notedata;
+    
+
+    var query = Products.findOne({
+        productID: pID
+      });
+
+     query
+    .exec()
+    .then(product => {
+        // product.serviceCount = userviceCount
+        if(uisActive != null){
+            product.isActive = uisActive
+        }
+        if(userviceCount != null){
+            product.serviceCount = userviceCount
+        }
+        if(userviceDate != null){
+            product.serviceDate = userviceDate
+        }
+        if(uempName != null && uremark != null){
+            product.notes.push({
+                empName:req.body.empName,
+                remark:req.body.notedata
+            })
+            
+        }
+       return product.save();
+    })
+    .then(data => {
+        res.status(200).json({
+            isSuccess: true,
+            ErrorCode: 0,
+            message: "Product detail is updated"
+          });
+    })
+    .catch(err => {
+        console.log(err + "POST CATEGORY ERROR");
+        res.status(500).json({
+            isSuccess: false,
+            message: err,
+            error_code: 101
+        });
+    })
 
 }

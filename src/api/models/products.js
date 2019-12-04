@@ -17,7 +17,17 @@ const productSchema = mongoose.Schema({
     serviceDate: { type: String, default: Date.now },
     serviceCount: { type: Number, require: false },
     isActive: { type: Boolean, require: true, default: false },
-    productImage: { type: String, require: false },
+    notedata:{ type: String},
+    empName:{ type: String},
+    productImage:{type:String},
+    notes:[
+        {
+            empName:{ type: String,},
+            remark:{ type: String,},
+            date:{ type: String, default: Date.now },
+            _id: false
+        }
+    ]
 })
 
 
