@@ -150,3 +150,26 @@ exports.user_signup = (req, res, next) => {
         });
 
 }
+
+exports.get_alluser = (req, res,next) => {
+    User.find()
+        .exec()
+        .then(response => {
+            res.status(200).json({
+                Data: {
+                    users: response
+                },
+                isSuccess: true,
+                Message: "",
+                error_code: 0
+            });
+        })
+        .catch(err => {
+            console.log(err + "Get err");
+            res.status(500).json({
+                isSuccess: false,
+                error_code: 101,
+                message: "CATEGORY_NOT_FOUND_ERR"
+            });
+        });
+}

@@ -59,6 +59,7 @@ exports.add_product = (req, res, next) => {
                     serviceDate: req.body.serviceDate,
                     serviceCount: req.body.serviceCount,
                     isActive: req.body.isActive,
+                    installedBy:req.body.installedBy,
                     notes:[{
                         empName:req.body.empName,
                         remark:req.body.notedata
@@ -98,6 +99,7 @@ exports.add_product = (req, res, next) => {
                     serviceDate: req.body.serviceDate,
                     serviceCount: req.body.serviceCount,
                     isActive: req.body.isActive,
+                    installedBy:req.body.installedBy,
                     notes:[{
                         empName:req.body.empName,
                         remark:req.body.notedata
@@ -142,6 +144,7 @@ exports.add_product = (req, res, next) => {
                 serviceDate: req.body.serviceDate,
                 serviceCount: req.body.serviceCount,
                 isActive: req.body.isActive,
+                installedBy:req.body.installedBy,
                 notes:[{
                     empName:req.body.empName,
                     remark:req.body.notedata

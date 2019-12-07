@@ -14,6 +14,7 @@ userRoute.post("/signup", UserController.user_signup)
 //-- Request handler 
 userRoute.post("/login", UserController.user_login)
 
+userRoute.get("/getallusers",UserController.get_alluser)
 //-- TODO get all user , delete user , edit user tolle , get sinle user
 
 
