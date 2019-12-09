@@ -9,7 +9,7 @@ const productSchema = mongoose.Schema({
     category: { type: String, require: true },
     city: { type: String, require: false },
     state: { type: String, require: false },
-    village: { type: String, require: false },
+    projectName: { type: String, require: false },
     country: { type: String, require: false },
     latitude: { type: Number, require: true },
     longitude: { type: Number, require: true },
