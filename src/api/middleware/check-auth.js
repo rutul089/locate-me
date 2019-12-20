@@ -11,16 +11,16 @@ module.exports = (req, res, next) => {
         if (error.message == "jwt expired") {
             console.log(error + " Exp");
             return res.status(200).json({
-                isSuccess: false,
+                isSuccess: true,
                 message: "Token is not valid",
                 error_code: 21
             });
         } else {
             console.log(error);
             return res.status(200).json({
-                isSuccess: false,
+                isSuccess: true,
                 message: "Token is not valid",
-                error_code: 21
+                error_code: 20
             });
         }
         return res.status(401).json({
