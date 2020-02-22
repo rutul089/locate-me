@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 
 exports.user_login = (req, res, next) => {
 
-    User.findOne({ userEmail: req.body.userEmail })
+     User.findOne({ userEmail: req.body.userEmail })
         .exec()
         .then(user => {
             //-- Checkign for user
