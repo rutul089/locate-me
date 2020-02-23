@@ -64,7 +64,8 @@ exports.add_product = (req, res, next) => {
                     installedBy: req.body.installedBy,
                     notes: [{
                         empName: req.body.empName,
-                        remark: req.body.notedata
+                        remark: req.body.notedata,
+                        date:req.body.installDate
                     }]
                 });
 
@@ -104,7 +105,8 @@ exports.add_product = (req, res, next) => {
                     installedBy: req.body.installedBy,
                     notes: [{
                         empName: req.body.empName,
-                        remark: req.body.notedata
+                        remark: req.body.notedata,
+                        date:req.body.installDate
                     }]
                 });
 
@@ -149,7 +151,8 @@ exports.add_product = (req, res, next) => {
                 installedBy: req.body.installedBy,
                 notes: [{
                     empName: req.body.empName,
-                    remark: req.body.notedata
+                    remark: req.body.notedata,
+                    date:req.body.installDate
                 }]
             });
 
