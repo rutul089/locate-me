@@ -136,7 +136,7 @@ exports.add_product = (req, res, next) => {
 
             const product = new Products({
                 _id: new mongoose.Types.ObjectId(),
-                productID: 455545454545,
+                productID: 1,
                 name: req.body.name,
                 category: req.body.category,
                 city: req.body.city,

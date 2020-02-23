@@ -8,7 +8,7 @@ let mongooseHidden = require("mongoose-hidden")();
  */
 const userSchema = mongoose.Schema(
     {
-        
+
         userID: { type: Number, index: true, unique: true, default: 1 },
         userName: { type: String, required: true },
         userEmail: {
@@ -18,7 +18,8 @@ const userSchema = mongoose.Schema(
             match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
         },
         userPassword: { type: String, required: true },
-        userRole: { type: Number, required: true }
+        userRole: { type: Number, required: true },
+        phoneNumber: { type: String }
     },
     {
         versionKey: false
@@ -26,6 +27,6 @@ const userSchema = mongoose.Schema(
 )
 userSchema.plugin(mongooseHidden, {
     hidden: { _id: true, userPassword: true }
-  });
+});
 
 module.exports = mongoose.model("Users", userSchema)

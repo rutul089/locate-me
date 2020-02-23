@@ -120,7 +120,8 @@ exports.user_signup = (req, res, next) => {
                             userName: req.body.userName,
                             userEmail: req.body.userEmail,
                             userPassword: hash,
-                            userRole: req.body.userRole
+                            userRole: req.body.userRole,
+                            phoneNumber:req.body.phoneNumber
                         });
                         user
                             .save()
