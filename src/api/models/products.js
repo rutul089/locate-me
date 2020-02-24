@@ -28,7 +28,11 @@ const productSchema = mongoose.Schema({
             date:{ type: String, default: Date.now },
             _id: false
         }
-    ]
+    ],
+    recentService:[{
+        empName:{ type: String,},
+        date:{ type: String, default: Date.now },
+    }]
 })
 
 

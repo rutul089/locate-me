@@ -174,3 +174,42 @@ exports.get_alluser = (req, res,next) => {
             });
         });
 }
+
+//-- To get specific product form product list
+exports.get_user = (req, res, next) => {
+    const id = req.params.userID;
+
+    var query = User.findOne({
+        userID: id
+    });
+
+    query
+        .exec()
+        .then(response => {
+            if (response) {
+                res.status(200).json({
+                    Data: {
+                        users: response
+                    },
+                    isSuccess: true,
+                    ErrorCode: 0,
+                    message: ""
+                });
+            } else {
+                return res.status(200).json({
+                    isSuccess: false,
+                    ErrorCode: 11,
+                    message: "No user found"
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).json({
+                isSuccess: false,
+                ErrorCode: 11,
+                message: "No user found"
+            });
+        })
+
+}

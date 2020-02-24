@@ -8,14 +8,19 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const UserController = require("../controller/user.controller") ;
 
+const checkAuth = require("../middleware/check-auth")
+
 //-- Signup route 
 userRoute.post("/signup", UserController.user_signup)
 
 //-- Request handler 
 userRoute.post("/login", UserController.user_login)
 
+//-- T0 get all user
 userRoute.get("/getallusers",UserController.get_alluser)
-//-- TODO get all user , delete user , edit user tolle , get sinle user
 
+//== To get specific user
+userRoute.get("/:userID", checkAuth, UserController.get_user)
 
+//-- TODO delete user , edit user tolle
 module.exports = userRoute;
