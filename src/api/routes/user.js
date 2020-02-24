@@ -22,5 +22,7 @@ userRoute.get("/getallusers",UserController.get_alluser)
 //== To get specific user
 userRoute.get("/:userID", checkAuth, UserController.get_user)
 
+//-- Change pwd 
+userRoute.post("/changepassword",checkAuth,UserController.user_changepwd)
 //-- TODO delete user , edit user tolle
 module.exports = userRoute;

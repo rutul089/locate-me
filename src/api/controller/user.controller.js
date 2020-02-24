@@ -4,9 +4,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 
+
 exports.user_login = (req, res, next) => {
 
-     User.findOne({ userEmail: req.body.userEmail })
+    User.findOne({ userEmail: req.body.userEmail })
         .exec()
         .then(user => {
             //-- Checkign for user
@@ -121,7 +122,7 @@ exports.user_signup = (req, res, next) => {
                             userEmail: req.body.userEmail,
                             userPassword: hash,
                             userRole: req.body.userRole,
-                            phoneNumber:req.body.phoneNumber
+                            phoneNumber: req.body.phoneNumber
                         });
                         user
                             .save()
@@ -152,7 +153,7 @@ exports.user_signup = (req, res, next) => {
 
 }
 
-exports.get_alluser = (req, res,next) => {
+exports.get_alluser = (req, res, next) => {
     User.find()
         .exec()
         .then(response => {
@@ -212,4 +213,78 @@ exports.get_user = (req, res, next) => {
             });
         })
 
+}
+
+//-- Function for changing user password 
+exports.user_changepwd = (req, res, next) => {
+    const newPwd = req.body.userNewPassword
+    User.findOne({ userID: req.body.userID })
+        .exec()
+        .then(user => {
+            //-- Checkign for user
+            if (user.length < 1) {
+                return res.status(404).json({
+                    isSuccess: false,
+                    message: "No user found..",
+                    error_code: 100
+                });
+            }
+
+            //-- This wil compare entered password and password from database
+            bcrypt.compare(req.body.userPassword, user.userPassword, (err, result) => {
+                if (err) {
+                    //-- Failed block
+                    return res.status(404).json({
+                        isSuccess: false,
+                        message: "No user found..",
+                        error_code: 100
+                    });
+                } else {
+                    //-- Sucess Block
+                    if (result) {
+                        bcrypt.hash(req.body.userNewPassword, 10, (err, hash) => {
+                            if (err) {
+                                return res.status(500).json({
+                                    isSuccess: false,
+                                    message: err,
+                                    error_code: 101
+                                });
+                            } else {
+                                user.userPassword = hash;
+                                user
+                                    .save()
+                                    .then(result => {
+                                        console.log(result);
+                                        res.status(200).json({
+                                            isSuccess: true,
+                                            message: "Your user password has been changed",
+                                            error_code: 0
+                                        });
+                                    })
+                                    .catch(err => {
+                                        res.status(400).json({
+                                            isSuccess: false,
+                                            message: "Something went wrong",
+                                            error_code: 101
+                                        });
+                                    });
+                            }
+                        });
+                    } else {
+                        //-- Password Do not match
+                        return res.status(404).json({
+                            isSuccess: false,
+                            message: "Old password incorrect",
+                            error_code: 101
+                        });
+                    }
+                }
+            });
+        }).catch(err => {
+            res.status(401).json({
+                isSuccess: false,
+                message: "No user found..",
+                error_code: 100
+            });
+        });
 }
