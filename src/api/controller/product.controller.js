@@ -1,10 +1,13 @@
 const mongoose = require("mongoose")
 const Products = require("../models/products");
 const ProductList = require("../models/productlist")
+//-- Get all products\
 
-//-- Get all products
 exports.get_all_products = (req, res, next) => {
-    Products.find()
+    Products.find({}, {
+        _id: 0, "productID": 1, "name": 1, "category": 1, "city": 1, "state": 1, "projectName": 1
+        , "country": 1, "latitude": 1, "longitude": 1, "installDate": 1, "serviceCount": 1, "isActive": 1, "installedBy": 1
+    })
         .exec()
         .then(response => {
             console.log(JSON.stringify(response))
@@ -65,7 +68,7 @@ exports.add_product = (req, res, next) => {
                     notes: [{
                         empName: req.body.empName,
                         remark: req.body.notedata,
-                        date:req.body.installDate
+                        date: req.body.installDate
                     }]
                 });
 
@@ -74,7 +77,7 @@ exports.add_product = (req, res, next) => {
                         console.log(result);
                         res.status(200).json({
                             isSuccess: true,
-                            message: "",
+                            message: "Location added successfully..",
                             error_code: 0,
                             result: result
                         });
@@ -106,7 +109,7 @@ exports.add_product = (req, res, next) => {
                     notes: [{
                         empName: req.body.empName,
                         remark: req.body.notedata,
-                        date:req.body.installDate
+                        date: req.body.installDate
                     }]
                 });
 
@@ -152,7 +155,7 @@ exports.add_product = (req, res, next) => {
                 notes: [{
                     empName: req.body.empName,
                     remark: req.body.notedata,
-                    date:req.body.installDate
+                    date: req.body.installDate
                 }]
             });
 

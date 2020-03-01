@@ -3,7 +3,29 @@ const User = require("../models/usermodel")
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+const nodemailer = require("nodemailer");
 
+var generator = require('generate-password');
+let password = generator.generate({
+    length: 6,
+    numbers: true,
+    symbols:true
+});
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'richardderamus63@gmail.com',
+        pass: "Navkar@123"
+    }
+});
+
+var mailOptions = {
+    from: 'richardderamus63@gmail.com',
+    to: 'rutul089@gmail.com',
+    subject: 'Sending email test',
+    text: 'This is test text'
+}
 
 exports.user_login = (req, res, next) => {
 
@@ -12,8 +34,8 @@ exports.user_login = (req, res, next) => {
         .then(user => {
             //-- Checkign for user
             if (user.length < 1) {
-                return res.status(404).json({
-                    isSuccess: false,
+                return res.status(200).json({
+                    isSuccess: true,
                     message: "No user found..",
                     error_code: 100
                 });
@@ -23,7 +45,7 @@ exports.user_login = (req, res, next) => {
             bcrypt.compare(req.body.userPassword, user.userPassword, (err, result) => {
                 if (err) {
                     //-- Failed block
-                    return res.status(404).json({
+                    return res.status(200).json({
                         isSuccess: false,
                         message: "No user found..",
                         error_code: 100
@@ -52,7 +74,7 @@ exports.user_login = (req, res, next) => {
                         });
                     } else {
                         //-- Password Do not match
-                        return res.status(404).json({
+                        return res.status(200).json({
                             isSuccess: false,
                             message: "No user found..",
                             error_code: 100
@@ -152,6 +174,7 @@ exports.user_signup = (req, res, next) => {
         });
 
 }
+
 
 exports.get_alluser = (req, res, next) => {
     User.find()
@@ -287,4 +310,33 @@ exports.user_changepwd = (req, res, next) => {
                 error_code: 100
             });
         });
+}
+
+//-  function for genrating new password 
+exports.user_forgotpwd = (req, res, next) => {
+
+    transporter.sendMail(mailOptions, function (err, info) {
+        if (err) {
+            return res.status(400).json({
+                isSuccess: false,
+                message: "No user found..",
+                error_code: 100,
+                data: err
+            });
+        } else {
+            return res.status(200).json({
+                isSuccess: true,
+                message: "No user found..",
+                error_code: 100,
+                data: info
+            });
+        }
+    })
+
+
+    //- Send user passward on email
+    
+
+
+
 }

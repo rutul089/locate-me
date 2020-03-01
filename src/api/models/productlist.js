@@ -19,9 +19,9 @@ const productSchema = mongoose.Schema({
 })
 
 
-productSchema.plugin(mongooseHidden, {
-    hidden: { __v: true }
-});
+// productSchema.plugin(mongooseHidden, {
+//     hidden: { __v: true }
+// });
 
 
 module.exports = mongoose.model('ProductList', productSchema);
